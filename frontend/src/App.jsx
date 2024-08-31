@@ -17,6 +17,7 @@ import ProtectedRoute from './components/admin/ProtectedRoute'
 
 
 const appRouter = createBrowserRouter([
+  // For the Studnet 
   {
     path: '/',
     element: <Home />
@@ -45,7 +46,7 @@ const appRouter = createBrowserRouter([
     path: "/profile",
     element: <Profile />
   },
-  // admin ke liye yha se start hoga
+  // For the Recruiter
   {
     path:"/admin/companies",
     element: <ProtectedRoute><Companies/></ProtectedRoute>

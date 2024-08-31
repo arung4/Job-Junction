@@ -13,7 +13,7 @@ const Job = ({job}) => {
         const createdAt = new Date(mongodbTime);
         const currentTime = new Date();
         const timeDifference = currentTime - createdAt;
-        return Math.floor(timeDifference/(1000*24*60*60));
+        return Math.floor(timeDifference/(1000*24*60*60)); // Time difference per day
     }
     
     return (
@@ -31,7 +31,7 @@ const Job = ({job}) => {
                 </Button>
                 <div>
                     <h1 className='font-medium text-lg'>{job?.company?.name}</h1>
-                    <p className='text-sm text-gray-500'>India</p>
+                    <p className='text-sm text-gray-500'>{job?.location}</p>
                 </div>
             </div>
 

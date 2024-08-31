@@ -29,6 +29,7 @@ const Login = () => {
     const submitHandler = async (e) => {
         e.preventDefault();
         try {
+            // Loading starts until login completes
             dispatch(setLoading(true));
             const res = await axios.post(`${USER_API_END_POINT}/login`, input, {
                 headers: {
@@ -45,6 +46,7 @@ const Login = () => {
             console.log(error);
             toast.error(error.response.data.message);
         } finally {
+            // loading stops as login completed
             dispatch(setLoading(false));
         }
     }
@@ -66,7 +68,7 @@ const Login = () => {
                             value={input.email}
                             name="email"
                             onChange={changeEventHandler}
-                            placeholder="patel@gmail.com"
+                            placeholder="your@gmail.com"
                         />
                     </div>
 
@@ -77,7 +79,7 @@ const Login = () => {
                             value={input.password}
                             name="password"
                             onChange={changeEventHandler}
-                            placeholder="patel@gmail.com"
+                            placeholder="password"
                         />
                     </div>
                     <div className='flex items-center justify-between'>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from './ui/carousel';
 import { Button } from './ui/button';
 import { useDispatch } from 'react-redux';
@@ -6,20 +6,40 @@ import { useNavigate } from 'react-router-dom';
 import { setSearchedQuery } from '@/redux/jobSlice';
 
 const category = [
-    "Frontend Developer",
-    "Backend Developer",
-    "Data Science",
+    "Frontend",
+    "Backend",
+    "Data Scientist",
     "Graphic Designer",
-    "FullStack Developer"
+    "Full Stack Developer", 
+    "Software Developer", 
+    "Data Analysts",
+    "System Programmer", 
+    "System Tester"
 ]
 
 const CategoryCarousel = () => {
+
+    const [selectedCategory, setSelectedCategory] = useState(''); // State for selected category
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const searchJobHandler = (query) => {
-        dispatch(setSearchedQuery(query));
-        navigate("/browse");
-    }
+
+    const handleCategoryChange = (category) => {
+        setSelectedCategory(category); // Update state when category is clicked
+    };
+
+    useEffect(() => {
+        if (selectedCategory) {
+            dispatch(setSearchedQuery(selectedCategory)); // Dispatch action when selectedCategory state changes
+            navigate("/browse");
+        }
+    }, [selectedCategory]);
+    // const dispatch = useDispatch();
+    // const navigate = useNavigate();
+
+    // const searchJobHandler = (query) => {
+    //     dispatch(setSearchedQuery(query));
+    //     navigate("/browse");
+    // }
 
     return (
         <div>
@@ -28,7 +48,7 @@ const CategoryCarousel = () => {
                     {
                         category.map((cat, index) => (
                             <CarouselItem className="md:basis-1/2 lg-basis-1/3">
-                                <Button onClick={()=>searchJobHandler(cat)} variant="outline" className="rounded-full">{cat}</Button>
+                                <Button onClick={()=>handleCategoryChange(cat)} variant="outline" className="rounded-full">{cat}</Button>
                             </CarouselItem>
                         ))
                     }

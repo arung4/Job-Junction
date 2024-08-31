@@ -34,16 +34,18 @@ const Signup = () => {
     }
     const submitHandler = async (e) => {
         e.preventDefault();
+        console.log(input);
         const formData = new FormData();    //formdata object
         formData.append("fullname", input.fullname);
         formData.append("email", input.email);
         formData.append("phoneNumber", input.phoneNumber);
         formData.append("password", input.password);
         formData.append("role", input.role);
+        console.log(formData);
         if (input.file) {
             formData.append("file", input.file);
         }
-
+      console.log(input.fullname)
         try {
             dispatch(setLoading(true));
             const res = await axios.post(`${USER_API_END_POINT}/register`, formData, {
@@ -52,6 +54,7 @@ const Signup = () => {
             });
             if (res.data.success) {
                 navigate("/login");
+                // to display success message
                 toast.success(res.data.message);
             }
         } catch (error) {
@@ -80,7 +83,7 @@ const Signup = () => {
                             value={input.fullname}
                             name="fullname"
                             onChange={changeEventHandler}
-                            placeholder="patel"
+                            placeholder="your name"
                         />
                     </div>
                     <div className='my-2'>
@@ -90,7 +93,7 @@ const Signup = () => {
                             value={input.email}
                             name="email"
                             onChange={changeEventHandler}
-                            placeholder="patel@gmail.com"
+                            placeholder="your@gmail.com"
                         />
                     </div>
                     <div className='my-2'>
@@ -100,7 +103,7 @@ const Signup = () => {
                             value={input.phoneNumber}
                             name="phoneNumber"
                             onChange={changeEventHandler}
-                            placeholder="8080808080"
+                            placeholder="0000000000"
                         />
                     </div>
                     <div className='my-2'>
@@ -110,7 +113,7 @@ const Signup = () => {
                             value={input.password}
                             name="password"
                             onChange={changeEventHandler}
-                            placeholder="patel@gmail.com"
+                            placeholder="password"
                         />
                     </div>
                     <div className='flex items-center justify-between'>
@@ -139,7 +142,7 @@ const Signup = () => {
                             </div>
                         </RadioGroup>
                         <div className='flex items-center gap-2'>
-                            <Label>Profile</Label>
+                            <Label>Photo</Label>
                             <Input
                                 accept="image/*"
                                 type="file"

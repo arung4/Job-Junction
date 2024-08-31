@@ -8,7 +8,7 @@ import axios from 'axios'
 import { COMPANY_API_END_POINT } from '@/utils/constant'
 import { useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'sonner'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import useGetCompanyById from '@/hooks/useGetCompanyById'
 
 const CompanySetup = () => {
@@ -33,20 +33,29 @@ const CompanySetup = () => {
         const file = e.target.files?.[0];
         setInput({ ...input, file });
     }
-
+    console.log("name", input.name);
+    console.log("description", input.description);
+    console.log("website", input.website);
+    console.log("location", input.location);
+    console.log("file", input.file);
+    
+    
     const submitHandler = async (e) => {
         e.preventDefault();
+        console.log(input);
         const formData = new FormData();
         formData.append("name", input.name);
         formData.append("description", input.description);
         formData.append("website", input.website);
         formData.append("location", input.location);
         if (input.file) {
+            console.log("INPUT FILE : ", input.file);
             formData.append("file", input.file);
         }
+       
         try {
-            setLoading(true);
-            const res = await axios.put(`${COMPANY_API_END_POINT}/update/${params.id}`, formData, {
+         setLoading(true);
+            const res = await axios.post(`${COMPANY_API_END_POINT}/update/${params.id}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 },

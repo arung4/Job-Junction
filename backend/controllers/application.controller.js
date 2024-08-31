@@ -1,6 +1,8 @@
 import { Application } from "../models/application.model.js";
 import { Job } from "../models/job.model.js";
 
+
+// USER- STUDENT WILL APPLY FOR A JOB
 export const applyJob = async (req, res) => {
     try {
         const userId = req.id;
@@ -45,6 +47,10 @@ export const applyJob = async (req, res) => {
         console.log(error);
     }
 };
+
+
+
+// USER- GET ALL THE JOBS THAT USER HAS APPLIED
 export const getAppliedJobs = async (req,res) => {
     try {
         const userId = req.id;
@@ -70,7 +76,9 @@ export const getAppliedJobs = async (req,res) => {
         console.log(error);
     }
 }
-// admin dekhega kitna user ne apply kiya hai
+
+
+// ADMIN - GET ALL APPLICANTS 
 export const getApplicants = async (req,res) => {
     try {
         const jobId = req.params.id;
@@ -95,6 +103,8 @@ export const getApplicants = async (req,res) => {
         console.log(error);
     }
 }
+
+// USER AND ADMIN - CHANGE THE STATUS OF JOB - APPLIED , PENDING OR REJECTED
 export const updateStatus = async (req,res) => {
     try {
         const {status} = req.body;
@@ -107,7 +117,7 @@ export const updateStatus = async (req,res) => {
         };
 
         // find the application by applicantion id
-        const application = await Application.findOne({_id:applicationId});
+        const application = await Application.findById({_id:applicationId});
         if(!application){
             return res.status(404).json({
                 message:"Application not found.",
