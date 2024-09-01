@@ -145,8 +145,8 @@ export const updateProfile = async (req, res) => {
    // convert file to datauri 
     const fileUri = getDataUri(file);
     
-       // Upload to Cloudinary, specifying resource_type as 'raw' for PDFs
-       const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
+    // Upload to Cloudinary, specifying resource_type as 'raw' for PDFs
+    const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
 
         console.log("cloud response: ", cloudResponse);
 
