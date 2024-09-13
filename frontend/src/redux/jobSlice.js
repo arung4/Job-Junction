@@ -11,7 +11,7 @@ const jobSlice = createSlice({
         searchedQuery:"",
     },
     reducers:{
-        // actions
+        // actions - action.payload will give you the data that needed to be added in the state 
         setAllJobs:(state,action) => {
             state.allJobs = action.payload;
         },

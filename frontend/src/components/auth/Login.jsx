@@ -37,6 +37,8 @@ const Login = () => {
         },
         withCredentials: true,
       });
+
+      console.log(res.data.success); 
       if (res.data.success) {
         dispatch(setUser(res.data.user));
         navigate("/");
